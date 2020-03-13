@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+
+<h1>Liste des produits</h1>
+
+<a class="btn btn-primary" href="{{path('product_new')}}">Create product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Photo</td>
+            <td>Nom</td>
+            <td>Stock</td>
+            <td>Prix</td>
+            <td>Info</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td><img src="{{asset('/uploads/'~ product.photo)}}" style="width:100px;height:100px;"/></td>
+                <td>{{product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price}} €</td>
+                <td><a class="btn btn-primary" href="{{path('product_detail', {id: product.id})}}"><i class="fas fa-info"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

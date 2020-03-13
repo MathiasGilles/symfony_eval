@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product.name}}{% endblock %}
+
+{% block body %}
+
+<h1>{{product.name}}</h1>
+
+<img src="{{asset('/uploads/'~ product.photo)}}" style="width: 200px;height:200px;"/>
+
+<p>Stock : {{product.quantity}}</p>
+
+<p>Prix : {{product.price}} €</p>
+
+<a class="btn btn-primary" src="#">Ajouter au panier</a>
+<a class="btn btn-danger" src="{{path('product_delete', {id:product.id})}}">Supprimer</a>
+
+{% endblock %}
