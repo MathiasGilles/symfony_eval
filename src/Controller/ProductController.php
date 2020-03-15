@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
+use App\Form\CartType;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
@@ -66,12 +69,31 @@ class ProductController extends AbstractController
     /**
      * @Route("/produt/{id}",name="product_detail")
      */
-    public function detail($id,ProductRepository $repo)
+    public function detail($id,ProductRepository $repo,Cart $cart = null,Request $request)
     {
         $product = $repo->find($id);
 
+        if ($cart == null ) {
+            $cart = new Cart;
+        }
+        $manager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(CartType::class, $cart);
+        $form -> handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $cart->setAddedAt(new \DateTime)
+                 ->setState(true);
+            $product->setCart($cart);
+            $manager->persist($cart);
+            $manager->flush();
+            $this->addFlash("success","Article ajouté au panier");
+        }
+
         return $this->render('product/product_detail.html.twig',[
             'product' => $product,
+            'formCart' => $form->createView()
         ]);
     }
 
