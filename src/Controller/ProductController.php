@@ -47,7 +47,7 @@ class ProductController extends AbstractController
                         $nomFicher
                     );
                 } catch (FileExeption $e) {
-                    $this->addFlash('danger', "Impossible d'uploader le fichier");
+                    $this->addFlash( "danger", "Impossible d'uploader le fichier");
                     return $this->redirectToRoute('product');
                 }
 

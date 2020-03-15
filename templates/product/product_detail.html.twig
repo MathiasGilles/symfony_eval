@@ -12,7 +12,8 @@
 
 <p>Prix : {{product.price}} €</p>
 
-<a class="btn btn-primary" src="#">Ajouter au panier</a>
-<a class="btn btn-danger" src="{{path('product_delete', {id:product.id})}}">Supprimer</a>
+<a class="btn btn-primary" href="{{path('cart_new')}}">Ajouter au panier</a>
+<a class="btn btn-danger" href="{{path('product_delete', {id:product.id})}}">Supprimer</a>
+
 
 {% endblock %}
