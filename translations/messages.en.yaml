@@ -1,0 +1,36 @@
+Name : Name
+
+Upload Photo : "Upload Photo"
+
+Quantity : Quantity
+
+Price: Price
+
+Save: Save
+
+buttonSupr: Delete
+
+added: Ajouté
+
+deleted: Supprimé
+
+notFound: Introuvable
+
+table:
+    name: Name
+    quantity: Quantity
+    price: Price
+    photo: Photo
+    action: Action
+    stock: Stock
+    info: Info
+
+panier:
+    title: "Cart"
+    total: "Total Amount : "
+    productTotal: "products in the cart"
+
+product:
+    title: "Products"
+    create: "Create product"
+    addCart: "Select quantity to add to cart"

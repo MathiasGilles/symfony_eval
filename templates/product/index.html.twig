@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products{% endblock %}
+{% block title %}{{'product.title'|trans}}{% endblock %}
 
 {% block body %}
 
-<h1>Liste des produits</h1>
+<h1>{{'product.title'|trans}}</h1>
 
-<a class="btn btn-primary" href="{{path('product_new')}}">Create product</a>
+<a class="btn btn-primary" href="{{path('product_new')}}">{{'product.create'|trans}}</a>
 
 <table class="table">
     <thead>
         <tr>
-            <td>Photo</td>
-            <td>Nom</td>
-            <td>Stock</td>
-            <td>Prix</td>
-            <td>Info</td>
+            <td>{{'table.photo'|trans}}</td>
+            <td>{{'table.name'|trans}}</td>
+            <td>{{'table.stock'|trans}}</td>
+            <td>{{'table.price'|trans}}</td>
+            <td>{{'table.info'|trans}}</td>
         </tr>
     </thead>
     <tbody>

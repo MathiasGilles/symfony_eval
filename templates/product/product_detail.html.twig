@@ -8,13 +8,13 @@
 
 <img src="{{asset('/uploads/'~ product.photo)}}" style="width: 200px;height:200px;"/>
 
-<p>Stock : {{product.quantity}}</p>
+<p>{{'table.stock'|trans}} : {{product.quantity}}</p>
 
-<p>Prix : {{product.price}} €</p>
+<p>{{'table.price'|trans}} : {{product.price}} €</p>
 
-<a class="btn btn-danger" href="{{path('product_delete', {id:product.id})}}">Supprimer</a>
+<a class="btn btn-danger" href="{{path('product_delete', {id:product.id})}}">{{'buttonSupr'|trans}}</a>
 
-<h1>Selectioner la quantité à ajouter</h1>
+<h1>{{'product.addCart'|trans}}</h1>
 
 {{form(formCart)}}
 

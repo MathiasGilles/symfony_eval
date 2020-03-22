@@ -10,7 +10,12 @@ use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+/**
+ * @Route("/{_locale}")
+ */
 
 class ProductController extends AbstractController
 {
@@ -27,7 +32,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/new",name="product_new")
      */
-    public function new(Product $produit = null,Request $request)
+    public function new(Product $produit = null,Request $request,TranslatorInterface $translator)
     {
         if ($produit == null) {
             $produit = new Product();
@@ -58,7 +63,7 @@ class ProductController extends AbstractController
             }
             $manager->persist($produit);
             $manager->flush();
-            $this->addFlash("success", "Produit ajoutée");
+            $this->addFlash("success", $translator->trans('added'));
         }
 
         return $this->render('product/product_new.html.twig',[
@@ -69,7 +74,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/produt/{id}",name="product_detail")
      */
-    public function detail($id,ProductRepository $repo,Cart $cart = null,Request $request)
+    public function detail($id,ProductRepository $repo,Cart $cart = null,Request $request,TranslatorInterface $translator)
     {
         $product = $repo->find($id);
 
@@ -88,7 +93,7 @@ class ProductController extends AbstractController
             $product->setCart($cart);
             $manager->persist($cart);
             $manager->flush();
-            $this->addFlash("success","Article ajouté au panier");
+            $this->addFlash("success",$translator->trans('added'));
         }
 
         return $this->render('product/product_detail.html.twig',[
@@ -100,17 +105,17 @@ class ProductController extends AbstractController
     /**
      * @Route("/produit/delete/{id}",name="product_delete")
      */
-    public function delete(Product $product = null)
+    public function delete(Product $product = null,TranslatorInterface $translator)
     {
         if($product != null){
             $manager=$this->getDoctrine()->getManager();
             $manager->remove($product);
             $manager->flush();
 
-            $this->addFlash("success","Produit supprimée");
+            $this->addFlash("success",$translator->trans('deleted'));
         }
         else {
-            $this->addFlash("danger", "Produit introuvable");
+            $this->addFlash("danger",$translator->trans('notFound'));
         }
         return $this->redirectToRoute('product');
     }

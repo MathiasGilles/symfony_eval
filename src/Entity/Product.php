@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -18,6 +19,14 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 20,
+     *      minMessage = "Your name must be at least 1 characters long",
+     *      maxMessage = "Your name cannot be longer than 20 characters"
+     * )
      */
     private $name;
 
@@ -28,11 +37,15 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\NotNull
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     * @Assert\NotNull
      */
     private $price;
 
